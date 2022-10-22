@@ -1,0 +1,101 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+function cal() {
+//document.getElementById("msg").value = url;
+}
+
+
+
+//用于创建XMLHttpRequest对象
+function createXmlHttp() {
+//根据window.XMLHttpRequest对象是否存在使用不同的创建方式
+if (window.XMLHttpRequest) {
+xmlHttp = new XMLHttpRequest(); //FireFox、Opera等浏览器支持的创建方式
+} else {
+xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");//IE浏览器支持的创建方式
+}
+}
+//直接通过XMLHttpRequest对象获取远程网页源代码
+function getSource() {
+var Cement = Number(document.getElementById("cement").value);
+var Sand = Number(document.getElementById("sand").value);
+var BuildAWall = Number(document.getElementById("build_a_wall").value);
+var CommonBrick = Number(document.getElementById("common_brick").value);
+var Rubbish = Number(document.getElementById("rubbish").value);
+var GreenTile = Number(document.getElementById("green_tile").value);
+var AirBrick = Number(document.getElementById("air_brick").value);
+var CeramicTile = Number(document.getElementById("ceramic_tile").value);
+var getCement = Number(document.getElementById("priceCement").value);
+var getSand = Number(document.getElementById("priceSand").value);
+var getCommonBrick = Number(document.getElementById("priceCommon_brick").value);
+var getAirBrick = Number(document.getElementById("priceAir_brick").value);
+var getCeramicbrick = Number(document.getElementById("priceCeramic_brick").value);
+var getGreenntile = Number(document.getElementById("priceGreen_tile").value);
+var url2 = '?Cement=' + Cement + '&Sand=' + Sand + '&BuildAWall=' + BuildAWall + '&CommonBrick=' + CommonBrick + '&Rubbish=' + Rubbish + '&GreenTile=' + GreenTile + '&AirBrick=' + AirBrick + '&CeramicTile=' + CeramicTile;
+var url3 = '&PriceCement='+ getCement +'&PriceSand=' + getSand + '&PriceCommonBrick=' + getCommonBrick + '&PriceAirBrick=' + getAirBrick + '&PriceCeramicbrick=' + getCeramicbrick + '&PriceGreentile=' + getGreenntile;
+var url = 'http://localhost/count/sum.php'+url2+url3; //获取目标地址信息
+//地址为空时提示用户输入
+if (url == "") {
+alert("请输入网页地址。");
+return;
+}
+//document.getElementById("source").value = "正在加载……"; //提示正在加载
+createXmlHttp(); //创建XMLHttpRequest对象
+xmlHttp.onreadystatechange = writeSource; //设置回调函数
+xmlHttp.open("GET", url, true);
+xmlHttp.send(null);
+}
+//将远程网页源代码写入页面文字区域
+function writeSource() {
+if (xmlHttp.readyState == 4) {
+document.getElementById("msg").value = xmlHttp.responseText;
+}
+}
+
+function putPrice(){
+document.getElementById("priceCement").value = "3";
+document.getElementById("priceSand").value = "60";
+document.getElementById("priceCommon_brick").value = "0.5";
+document.getElementById("priceAir_brick").value = "0.5";
+document.getElementById("priceCeramic_brick").value = "2.5";
+document.getElementById("priceGreen_tile").value = "1";
+}
+
+</script>
+</head>
+	<body onload="putPrice()">
+	
+		水泥每袋<textarea rows="1" cols="4" id="priceCement"></textarea>元，请输入量：
+		<input style="height:120px;" id="cement">
+		<br><br>
+		沙子每方<textarea rows="1" cols="4" id="priceSand"></textarea>元，请输入数量：
+		<input style="height:120px;" id="sand">
+		<br><br>
+		红砖每块<textarea rows="1" cols="4" id="priceCommon_brick"></textarea>元，请输入数量：
+		<input style="height:120px;" id="common_brick">
+		<br><br>
+		青瓷砖每块<textarea rows="1" cols="4" id="priceGreen_tile"></textarea>元，请输入数量：
+		<input style="height:120px;" id="green_tile">
+		<br><br>
+		空心砖每块<textarea rows="1" cols="4" id="priceAir_brick"></textarea>元，请输入数量：
+		<input style="height:120px;" id="air_brick">
+		<br><br>
+		瓷砖每块<textarea rows="1" cols="4" id="priceCeramic_brick"></textarea>元，请输入数量：
+		<input style="height:120px;" id="ceramic_tile">
+		<br><br>
+		打墙请输入金额：
+		<input style="height:120px;" id="build_a_wall">
+		<br><br>
+		清理垃圾请输入金额：
+		<input style="height:120px;" id="rubbish">
+		<br><br>
+		<button onclick="getSource()">
+			计算
+		</button>
+		<br><br>
+		信息:
+		<textarea rows="10" cols="20" id="msg"></textarea>
+	</body>
+</html>
