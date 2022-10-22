@@ -35,7 +35,7 @@ var getCeramicbrick = Number(document.getElementById("priceCeramic_brick").value
 var getGreenntile = Number(document.getElementById("priceGreen_tile").value);
 var url2 = '?Cement=' + Cement + '&Sand=' + Sand + '&BuildAWall=' + BuildAWall + '&CommonBrick=' + CommonBrick + '&Rubbish=' + Rubbish + '&GreenTile=' + GreenTile + '&AirBrick=' + AirBrick + '&CeramicTile=' + CeramicTile;
 var url3 = '&PriceCement='+ getCement +'&PriceSand=' + getSand + '&PriceCommonBrick=' + getCommonBrick + '&PriceAirBrick=' + getAirBrick + '&PriceCeramicbrick=' + getCeramicbrick + '&PriceGreentile=' + getGreenntile;
-var url = 'http://localhost/count/sum.php'+url2+url3; //获取目标地址信息
+var url = 'https://superchaosci.github.io/sum.php'+url2+url3; //获取目标地址信息
 //地址为空时提示用户输入
 if (url == "") {
 alert("请输入网页地址。");
